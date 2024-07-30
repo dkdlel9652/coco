@@ -12,11 +12,12 @@
     <script>
         var todoList = [
             {seq:101, title:"여행하기", done:false},
-            {seq:102, title:"포트폴리오 만들기", done:true},
+            {seq:102, title:"포트폴리오 만들기", done:false},
             {seq:103, title:"팀 프로젝트 하기", done:false},
+            {seq:105, title:"저녁먹기", done:false},
             {seq:104, title:"엄마 생일 선물 준비하기", done:false},
         ];
-        var seqCnt = 105;
+        var seqCnt = 106;
 
         window.onload=function() {
             var memoTxt = document.getElementById('memoTxt');
@@ -68,8 +69,17 @@
             }
 
             // 자바스크립트 최상위 객체에 선언
-            window.aaaa = function() {
-                console.log('windows.aaa() 호출...');
+            window.aaaa = function(element) {
+                var trElement = element.parentElement.parentElement;
+                var targetSeq = trElement.dataset.seq;
+                var idx = todoList.findIndex(function(todo) {
+                    return targetSeq == todo.seq;
+                });
+
+                if(idx != -1) {
+                    todoList[idx].done = !todoList[idx].done;
+                    drawList();
+                }
             }
 
             function drawList() {
@@ -80,8 +90,8 @@
                     //console.log(todoObj.seq, todoObj.title, todoObj.done);
                     // 여러줄 문자열 따옴표(``)를 사용하면 템플릿 문자열로 사용 가능.
                     demo.innerHTML += `<tr align="center" data-seq="${todoObj.seq}">
-                        <td><input type="checkbox" onchange="window.aaaa(this)"></td>
-                        <td class="titleBox">${ todoObj.title }</td>
+                        <td><input type="checkbox" ${todoObj.done?"checked":""} onchange="window.aaaa(this)"></td>
+                        <td class="titleBox" style="${todoObj.done?"text-decoration:line-through":""}">${ todoObj.title }</td>
                         <td class="modifyBox">
                             <input type="text" class="modifyTxt"> <button class="modifyBtn">수정완료</button>
                         </td>

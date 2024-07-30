@@ -14,9 +14,10 @@
             {seq:101, title:"여행하기", done:false},
             {seq:102, title:"포트폴리오 만들기", done:true},
             {seq:103, title:"팀 프로젝트 하기", done:false},
+            {seq:105, title:"저녁먹기", done:true},
             {seq:104, title:"엄마 생일 선물 준비하기", done:false},
         ];
-        var seqCnt = 105;
+        var seqCnt = 106;
 
         window.onload=function() {
             var memoTxt = document.getElementById('memoTxt');
@@ -64,15 +65,27 @@
                         drawList();
                     };
                 }
-                
             }
 
             // 자바스크립트 최상위 객체에 선언
-            window.aaaa = function() {
-                console.log('windows.aaa() 호출...');
+            window.aaaa = function(element) {
+                var trElement = element.parentElement.parentElement;
+                var targetSeq = trElement.dataset.seq;
+                var idx = todoList.findIndex(function(todo) {
+                    return targetSeq == todo.seq;
+                });
+
+                if(idx != -1) {
+                    todoList[idx].done = !todoList[idx].done;
+                    drawList();
+                }
             }
 
-            function drawList() {
+            function drawList(list) {
+                let todoList = window.todoList;
+                if(list) {
+                    todoList = list;
+                }
                 // todoList 배열의 내용을 목록으로 만든다.
                 // 반복하기 전에 초기화 필수.
                 demo.innerHTML = "";
@@ -80,8 +93,8 @@
                     //console.log(todoObj.seq, todoObj.title, todoObj.done);
                     // 여러줄 문자열 따옴표(``)를 사용하면 템플릿 문자열로 사용 가능.
                     demo.innerHTML += `<tr align="center" data-seq="${todoObj.seq}">
-                        <td><input type="checkbox" onchange="window.aaaa(this)"></td>
-                        <td class="titleBox">${ todoObj.title }</td>
+                        <td><input type="checkbox" ${todoObj.done?"checked":""} onchange="window.aaaa(this)"></td>
+                        <td class="titleBox" style="${todoObj.done?"text-decoration:line-through":""}">${ todoObj.title }</td>
                         <td class="modifyBox">
                             <input type="text" class="modifyTxt"> <button class="modifyBtn">수정완료</button>
                         </td>
@@ -109,7 +122,25 @@
                     handleEvent(event);
                 }
             }
+
+            document.querySelector("input#searchTxt").onkeyup = function(event) {
+                console.log(event.target.value);
+                var title = event.target.value;
+                var newTodoList = [];
+                for(var i=0; i<todoList.length; i++) {
+                    if(todoList[i].title.indexOf(title) != -1) {
+                        newTodoList.push(todoList[i]);
+                    }
+                }
+                if(newTodoList.length >= 1) {
+                    drawList(newTodoList);
+                }
+            }
         }
+
+        // localStorage.setItem("todoList", JSON.stringify(todoList));
+        // var loadTodoList = JSON.parse( localStorage.getItem("todoList") );
+        // console.log(loadTodoList);
     </script>
 </head>
 <body>
@@ -119,7 +150,7 @@
     <button type="button" id="resetBtn">초기화</button>
     <hr>
     검색: <input type="text" id="searchTxt"> 
-    <button id="searchBtn">검색</button>
+    <!-- <button id="searchBtn">검색</button> -->
     <hr>
     <table width="550" border="1">
         <thead>
