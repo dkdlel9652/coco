@@ -12,8 +12,8 @@
     이메일: <%= human.email %><br>
     직업: <%= human.job %>
     <hr>
-    <a href="">수정</a>
-    <a href="">삭제</a>
+    <a href="/human/edit?no=<%= human.no %>">수정</a>
+    <a href="/human/delete?no=<%= human.no %>">삭제</a>
 
 </body>
 </html>

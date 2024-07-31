@@ -13,10 +13,10 @@ app.use(express.static('public'));
 
 // 사람 데이터 목록 선언
 const humanList = [
-    {no:102, name:'고길동', email:'go@human.com', job:'개발자'},
-    {no:103, name:'김길동', email:'kim@human.com', job:'간호사'},
-    {no:104, name:'박길동', email:'park@human.com', job:'변호사'},
-    {no:105, name:'이길동', email:'lee@human.com', job:'군인'}
+    {no:101, name:'고길동', email:'go@human.com', job:'개발자', age: 24},
+    {no:102, name:'허길동', email:'heo@human.com', job:'간호사', age: 27},
+    {no:103, name:'장길동', email:'jang@human.com', job:'변호사', age:25},
+    {no:104, name:'방길동', email:'bang@human.com', job:'군인', age:23}
 ];
 
 // localhost:8000/human
@@ -41,6 +41,20 @@ app.get('/human/detail', function(req, res) {
         human = humanList[idx];
     }
     req.app.render('humanDetail', {human}, function(err, html) {
+        res.end(html);
+    });
+});
+
+app.get('/human/edit', function(req, res) {
+    console.log("GET - /human/edit >>>> no: " + req.query.no);
+    var idx = humanList.findIndex(function(human) {
+        return human.no == req.query.no;
+    });
+    var human = null;
+    if(idx != -1) {
+        human = humanList[idx];
+    }
+    req.app.render('humanEdit', {human}, function(err, html) {
         res.end(html);
     });
 });
