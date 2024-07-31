@@ -7,7 +7,7 @@
 </head>
 <body>
     <h3><%= message %></h3>
-    <p>Human Page</p>
+    <h1>Human page</h1>
     <hr>
     <table width="100%" border="1">
         <tr>
@@ -15,17 +15,17 @@
             <th>성명</th>
             <th>이메일</th>
         </tr>
-        <%
-            // 이 부분은 자바스크립트 문법
-            for(var i=0; i<humanList.length; i++) {
-        %>
+    <% 
+        // 이 부분은 자바스크립트 문법
+        humanList.forEach(function(human) {
+    %>
         <tr align="center">
-            <td>101</td>
-            <td>홍길동</td>
-            <td>hong@human.com</td>
+            <td><%= human.no %></td>
+            <td><a href="/human/detail?no=<%= human.no %>"><%= human.name %></a></td>
+            <td><%= human.email %></td>
         </tr>
-<%
-    }
+    <%
+        });
     %>
     </table>
 </body>
