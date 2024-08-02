@@ -45,11 +45,11 @@ app.get('/data', (req, res) => {
 
 // 임시 todoList 데이터 저장
 const todoList = [
-    {no: 101, title:'자연 보호 하기', done:true},
-    {no: 102, title:'엄마 생일 선물', done:false},
-    {no: 103, title:'아빠 집 사주기', done:true},
-    {no: 104, title:'취직 하기', done:false},
-    {no: 105, title:'여친 부모님 여행 시켜주기', done:false}
+    {no: 101, title:'환경 보호', done:true},
+    {no: 102, title:'자기 보호', done:false},
+    {no: 103, title:'애인 보호', done:true},
+    {no: 104, title:'부모님 보호', done:false},
+    {no: 105, title:'동물 보호', done:false}
 ];
 
 var noSeq = 106;
