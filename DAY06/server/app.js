@@ -100,7 +100,7 @@ app.post('/todo', (req, res) => {
 app.put('/todo', (req, res) => {
     //var no = req.body.no;
     //var title = req.body.title;
-    //var done = req.body.done; // 문자열을 boolean으로 변경.
+    //var done = req.body.done; // 문자열을 boolean으로 변경
 
     var todo = req.body;
     console.dir(todo);
