@@ -78,7 +78,6 @@
 </head>
 <body>
     <h1>햄버거하우스 게임</h1>
-    <a href="../DAY10/day10quiz01_line.html">오류해결</a>
     <button id="startBtn">START</button><button id="stopBtn">STOP</button>
     <hr>
     <div id="box">
@@ -111,8 +110,8 @@
         this.intervalRef = setInterval(() => {
             this.y -= 10;
             this.elementUl.style.top = this.y + "px";
-            if(this.y <= -900) {
-                this.y = 0;
+            if(this.y <= -800) {
+                this.y = -600;
             }
         }, speed);
     }
@@ -189,12 +188,12 @@
                 document.querySelector('#line6').style.display = "block";
             }
             if(metrixArr[2][0].yPos == metrixArr[1][1].yPos && metrixArr[1][1].yPos == metrixArr[0][2].yPos) {
-                document.querySelector('#line7').style.display = "block";
-            }
-            if(metrixArr[0][0].yPos == metrixArr[1][1].yPos && metrixArr[1][1].yPos == metrixArr[2][2].yPos) {
                 document.querySelector('#line8').style.display = "block";
             }
-        }, 1500);
+            if(metrixArr[0][0].yPos == metrixArr[1][1].yPos && metrixArr[1][1].yPos == metrixArr[2][2].yPos) {
+                document.querySelector('#line7').style.display = "block";
+            }
+        }, 1100);
     });
 </script>
 </body>
