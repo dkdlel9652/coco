@@ -3,4 +3,4 @@ import ReactDOM from 'react-dom/client';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
-root.render(<h1>Album ex</h1>);
+root.render(<App/>);
